@@ -1,0 +1,16 @@
+version: 2
+
+seeds:
+  - name: state_to_region
+    description: "US state codes mapped to Census Bureau region and division"
+    columns:
+      - name: state_code
+        tests:
+          - unique
+          - not_null
+      - name: state_name
+        tests:
+          - not_null
+      - name: census_region
+        tests:
+          - not_null
