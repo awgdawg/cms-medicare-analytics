@@ -1,0 +1,16 @@
+# Copy this into ~/.dbt/profiles.yml (Windows: C:\Users\<you>\.dbt\profiles.yml)
+# and update keyfile/project to match your environment.
+
+cms_medicare:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: /path/to/cms-analytics-sa.json
+      project: cms-medicare-analytics
+      dataset: warehouse_dev
+      location: US
+      threads: 4
+      timeout_seconds: 300
+      priority: interactive
