@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: dim_setting
+    description: "2-row dimension: inpatient vs outpatient"
+    columns:
+      - name: setting_sk
+        tests: [unique, not_null]
+      - name: setting_code
+        tests: [unique, not_null]
+
+  - name: dim_geography
+    description: "US states and territories, mapped to Census region/division"
+    columns:
+      - name: geo_sk
+        tests: [unique, not_null]
+      - name: state_code
+        tests: [unique, not_null]
+
+  - name: dim_provider
+    description: "Distinct providers across both inpatient and outpatient sources"
+    columns:
+      - name: provider_sk
+        tests: [unique, not_null]
+      - name: provider_id
+        tests: [unique, not_null]
+
+  - name: dim_procedure
+    description: "Distinct procedures (DRG for inpatient, APC for outpatient)"
+    columns:
+      - name: procedure_sk
+        tests: [unique, not_null]
+      - name: procedure_code
+        tests: [not_null]
+      - name: setting
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['inpatient', 'outpatient']
