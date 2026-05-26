@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: cms_medicare
+    description: "Public CMS Medicare provider charge data on BigQuery"
+    database: bigquery-public-data
+    schema: cms_medicare
+    tables:
+      - name: inpatient_charges_2011
+        description: "Inpatient hospital charges, 2011"
+      - name: inpatient_charges_2012
+      - name: inpatient_charges_2013
+      - name: inpatient_charges_2014
+      - name: inpatient_charges_2015
+      - name: outpatient_charges_2011
+        description: "Outpatient hospital charges, 2011"
+      - name: outpatient_charges_2012
+      - name: outpatient_charges_2013
+      - name: outpatient_charges_2014
+      - name: outpatient_charges_2015
