@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Secrets
+*.json
+!packages.lock.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Generated docs (we keep one screenshot in docs/, but not the full dbt-docs build)
+manifest.json
+catalog.json
