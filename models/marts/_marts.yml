@@ -77,3 +77,41 @@ models:
       - name: avg_covered_charges
         tests:
           - not_null
+
+  - name: mart_national_ratio
+    description: "Single-row mart: national cost-payment ratio rolled up across all years/providers/procedures"
+    columns:
+      - name: cost_payment_ratio
+        tests:
+          - not_null
+
+  - name: mart_yearly_trend
+    description: "One row per year (2011-2015); national cost-payment ratio trend"
+    columns:
+      - name: year
+        tests: [unique, not_null]
+      - name: cost_payment_ratio
+        tests: [not_null]
+
+  - name: mart_top_procedures
+    description: "Top 20 procedures per setting by cost-payment gap, with min 100 services threshold"
+    columns:
+      - name: procedure_code
+        tests: [not_null]
+      - name: setting
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['inpatient', 'outpatient']
+
+  - name: mart_state_ratio
+    description: "One row per state; cost-payment ratio rolled up"
+    columns:
+      - name: provider_state
+        tests: [unique, not_null]
+
+  - name: mart_setting_comparison
+    description: "One row per (setting, year); inpatient vs outpatient over time"
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [setting, year]
