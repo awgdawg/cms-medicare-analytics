@@ -37,3 +37,43 @@ models:
           - not_null
           - accepted_values:
               values: ['inpatient', 'outpatient']
+
+  - name: fact_provider_procedure_year
+    description: "One row per (provider, procedure, setting, year). Foreign keys to all 4 dims."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: [provider_sk, procedure_sk, setting_sk, year]
+    columns:
+      - name: provider_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_provider')
+              field: provider_sk
+      - name: procedure_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_procedure')
+              field: procedure_sk
+      - name: geo_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_geography')
+              field: geo_sk
+      - name: setting_sk
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_setting')
+              field: setting_sk
+      - name: year
+        tests:
+          - not_null
+          - accepted_values:
+              values: [2011, 2012, 2013, 2014, 2015]
+              quote: false
+      - name: avg_covered_charges
+        tests:
+          - not_null
